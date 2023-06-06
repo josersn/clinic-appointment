@@ -1,9 +1,13 @@
 interface IPlansService {
-  create(data: any): Promise<any>;
+  create(data: PlanDTO): Promise<PlanDTO>;
 }
 
 class PlansService implements IPlansService {
-  create(data: any): Promise<any> {
-    throw new Error("Method not implemented.");
+  constructor(private repository: IPlaneRepository) {}
+
+  async create(data: PlanDTO): Promise<PlanDTO> {
+    return this.repository.create(data);
   }
 }
+
+export { PlansService, IPlansService };

@@ -1,24 +1,20 @@
 import { IUseCase } from "../../../core/use-case";
+import { IPlansService } from "../../../services/plans.service";
 
 interface IRequest {
   name: string;
+  document: string;
 }
 
 type ICreatePlanUseCase = IUseCase<IRequest, PlanDTO>;
 
 class CreatePlanUseCase implements ICreatePlanUseCase {
-
   constructor(private service: IPlansService) {}
 
-  async exec({ name }: IRequest): Promise<PlanDTO> {
+  async exec(data: IRequest): Promise<PlanDTO> {
+    const plan = await this.service.create(data);
 
-    const plan = await this.service.create(name);
-
-    return {
-      id: BigInt(1),
-      name: name,
-      isActive: true,
-    };
+    return plan;
   }
 }
 

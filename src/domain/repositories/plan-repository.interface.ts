@@ -4,5 +4,6 @@ interface IPlaneRepository {
 interface PlanDTO {
   id?: bigint;
   name: string;
-  isActive: boolean;
+  document: string;
+  isActive?: boolean;
 }

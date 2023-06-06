@@ -1,5 +1,8 @@
 class Plan {
-    id: bigint;
-    name: string;
-    isActive: boolean;
+  id: bigint;
+  name: string;
+  document: string;
+  isActive: boolean;
 }
+
+export { Plan };

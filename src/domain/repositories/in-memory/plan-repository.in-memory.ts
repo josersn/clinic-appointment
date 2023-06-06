@@ -1,3 +1,5 @@
+import { Plan } from "../../entities/plan";
+
 class PlanRepositoryInMemory implements IPlaneRepository {
   private plans: Plan[];
 
@@ -8,8 +10,8 @@ class PlanRepositoryInMemory implements IPlaneRepository {
     const plan = new Plan();
 
     Object.assign(plan, {
-      id: data.id,
-      name: data.name,
+      id: Math.floor(Math.random() * 100),
+      ...data,
       isActive: true,
     });
 
@@ -18,3 +20,5 @@ class PlanRepositoryInMemory implements IPlaneRepository {
     return plan;
   }
 }
+
+export { PlanRepositoryInMemory };
