@@ -22,4 +22,21 @@ describe("Create specialist use case", () => {
     expect(specialist.name).toBe(data.name);
     expect(specialist.specialty).toBe(data.specialty);
   });
+
+  it("Should not be able to create a new Specialist invalid document", async () => {
+    const data = {
+      name: "Laura Mitiura",
+      document: "WRONG_DOCUMENT",
+      specialty: "Nutricionista",
+    };
+
+    const repository = new SpecialistRepositoryInMemory();
+    const service = new SpecialistService(repository);
+    const useCase = new CreateSpecialistUseCase(service);
+
+    await expect(useCase.exec(data)).rejects.toThrowError(
+      new Error("Invalid specialist document")
+    );
+
+  });
 });
