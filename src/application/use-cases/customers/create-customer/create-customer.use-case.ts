@@ -24,6 +24,14 @@ class CreateCustomerUseCase implements ICreateCustomerUseCase {
       throw new Error("Customer email already used");
     }
 
+    const customerPhoneAlreadyCreated = await this.service.findCustomerByPhone(
+      data.phone
+    );
+
+    if (customerPhoneAlreadyCreated) {
+      throw new Error("Customer phone already used");
+    }
+
     return this.service.create(data);
   }
 }
