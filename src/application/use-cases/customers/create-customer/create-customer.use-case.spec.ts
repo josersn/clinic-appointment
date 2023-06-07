@@ -14,14 +14,34 @@ describe("Create Customer Use Case", () => {
 
     const repository = new CustomerRepositoryInMemory();
     const service = new CustomerService(repository);
-    const userCase = new CreateCustomerUseCase(service);
+    const useCase = new CreateCustomerUseCase(service);
 
-    const customer = await userCase.exec(data);
+    const customer = await useCase.exec(data);
     expect(customer).toBeTruthy();
     expect(customer).toHaveProperty("id");
     expect(customer.id).toBeTruthy();
     expect(customer.isActive).toBe(true);
     expect(customer.name).toBe(data.name);
     expect(customer.email).toBe(data.email);
+  });
+
+  it("Should not be able to create customer with email already exist", async () => {
+    const data = {
+      name: "José Ramos",
+      document: "94799189000",
+      email: "jose.ramos@gmail.com",
+      password: "12345678",
+      phone: "11970707070",
+    };
+
+    const repository = new CustomerRepositoryInMemory();
+    const service = new CustomerService(repository);
+    const useCase = new CreateCustomerUseCase(service);
+
+    await useCase.exec(data);
+
+    await expect(useCase.exec(data)).rejects.toThrowError(
+      new Error("Customer email already used")
+    );
   });
 });
