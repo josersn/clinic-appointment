@@ -24,6 +24,13 @@ class CustomerRepositoryInMemory implements ICustomerRepository {
 
     return customer;
   }
+
+  async findBy({ where }: any): Promise<Customer | undefined> {
+    const key = Object.keys(where)[0];
+    const value = Object.values(where)[0];
+
+    return this.customers.find((plan) => plan[key] === value);
+  }
 }
 
-export { CustomerRepositoryInMemory}
+export { CustomerRepositoryInMemory };

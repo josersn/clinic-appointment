@@ -6,6 +6,7 @@ import {
 
 interface ICustomerService {
   create(customer: CustomerDTO): Promise<Customer>;
+  findCustomerByEmail(email: string): Promise<Customer | undefined>;
 }
 
 class CustomerService implements ICustomerService {
@@ -13,6 +14,13 @@ class CustomerService implements ICustomerService {
 
   create(customer: CustomerDTO): Promise<Customer> {
     return this.repository.create(customer);
+  }
+  async findCustomerByEmail(email: string): Promise<Customer | undefined> {
+    return this.repository.findBy({
+      where: {
+        email,
+      },
+    });
   }
 }
 

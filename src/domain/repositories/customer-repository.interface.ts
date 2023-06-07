@@ -2,6 +2,7 @@ import { Customer } from "../entities/customer";
 
 interface ICustomerRepository {
   create(data: CustomerDTO): Promise<Customer>;
+  findBy(data: any): Promise<Customer | undefined>;
 }
 
 interface CustomerDTO {

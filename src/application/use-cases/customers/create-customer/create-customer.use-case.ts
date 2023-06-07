@@ -16,6 +16,14 @@ class CreateCustomerUseCase implements ICreateCustomerUseCase {
   constructor(private service: ICustomerService) {}
 
   async exec(data: IRequest): Promise<CustomerDTO> {
+    const customerAlreadyCreated = await this.service.findCustomerByEmail(
+      data.email
+    );
+
+    if (customerAlreadyCreated) {
+      throw new Error("Customer email already used");
+    }
+
     return this.service.create(data);
   }
 }
