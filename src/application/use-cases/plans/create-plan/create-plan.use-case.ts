@@ -1,3 +1,4 @@
+import { PlanDTO } from "../../../../domain/repositories/plan-repository.interface";
 import { IUseCase } from "../../../core/use-case";
 import { IPlansService } from "../../../services/plans.service";
 

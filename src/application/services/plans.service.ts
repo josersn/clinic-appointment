@@ -1,10 +1,15 @@
+import {
+  IPlanRepository,
+  PlanDTO,
+} from "../../domain/repositories/plan-repository.interface";
+
 interface IPlansService {
   create(data: PlanDTO): Promise<PlanDTO>;
   validateDocument(document: string): boolean;
 }
 
 class PlansService implements IPlansService {
-  constructor(private repository: IPlaneRepository) {}
+  constructor(private repository: IPlanRepository) {}
 
   async create(data: PlanDTO): Promise<PlanDTO> {
     return this.repository.create(data);

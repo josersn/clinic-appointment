@@ -1,6 +1,7 @@
 import { Plan } from "../../entities/plan";
+import { IPlanRepository, PlanDTO } from "../plan-repository.interface";
 
-class PlanRepositoryInMemory implements IPlaneRepository {
+class PlanRepositoryInMemory implements IPlanRepository {
   private plans: Plan[];
 
   constructor() {

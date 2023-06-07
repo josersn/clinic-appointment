@@ -1,4 +1,6 @@
-interface IPlaneRepository {
+import { Plan } from "../entities/plan";
+
+interface IPlanRepository {
   create(plan: PlanDTO): Promise<Plan>;
 }
 interface PlanDTO {
@@ -7,3 +9,5 @@ interface PlanDTO {
   document: string;
   isActive?: boolean;
 }
+
+export { IPlanRepository, PlanDTO };
