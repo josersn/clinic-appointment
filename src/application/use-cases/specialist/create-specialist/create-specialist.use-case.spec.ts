@@ -6,7 +6,7 @@ describe("Create specialist use case", () => {
   it("Should be able to create a new Specialist", async () => {
     const data = {
       name: "Laura Mitiura",
-      document: "123456789",
+      document: "32706157011",
       specialty: "Nutricionista",
     };
 

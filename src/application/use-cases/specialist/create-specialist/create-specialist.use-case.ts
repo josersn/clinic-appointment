@@ -14,6 +14,12 @@ class CreateSpecialistUseCase implements ICreatePlanUseCase {
   constructor(private service: ISpecialistService) {}
 
   async exec(data: IRequest): Promise<SpecialistDTO> {
+    const validDocument = this.service.validateDocument(data.document);
+
+    if (!validDocument) {
+      throw new Error("Invalid specialist document");
+    }
+
     return this.service.create(data);
   }
 }
