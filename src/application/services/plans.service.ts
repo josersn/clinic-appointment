@@ -6,6 +6,7 @@ import {
 interface IPlansService {
   create(data: PlanDTO): Promise<PlanDTO>;
   validateDocument(document: string): boolean;
+  findByDocument(document: string): Promise<PlanDTO | undefined>;
 }
 
 class PlansService implements IPlansService {
@@ -62,6 +63,13 @@ class PlansService implements IPlansService {
     if (resultado != digitos.charAt(1)) return false;
 
     return true;
+  }
+  async findByDocument(document: string): Promise<PlanDTO | undefined> {
+    return this.repository.findBy({
+      where: {
+        document,
+      },
+    });
   }
 }
 

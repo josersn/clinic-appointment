@@ -7,6 +7,7 @@ class PlanRepositoryInMemory implements IPlanRepository {
   constructor() {
     this.plans = [];
   }
+
   async create(data: PlanDTO): Promise<Plan> {
     const plan = new Plan();
 
@@ -19,6 +20,13 @@ class PlanRepositoryInMemory implements IPlanRepository {
     this.plans.push(plan);
 
     return plan;
+  }
+
+  async findBy({ where }: any): Promise<Plan | undefined> {
+    const key = Object.keys(where)[0];
+    const value = Object.values(where)[0];
+
+    return this.plans.find((plan) => plan[key] === value);
   }
 }
 

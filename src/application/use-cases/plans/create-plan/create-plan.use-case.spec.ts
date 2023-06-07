@@ -35,4 +35,21 @@ describe("Create Plan use case", () => {
       new Error("Invalid company document")
     );
   });
+
+  it("Should no be able to create a Plan with duplicated CNPJ", async () => {
+    const data = {
+      name: "Sami Saude",
+      document: "36567721000125",
+    };
+
+    const repository = new PlanRepositoryInMemory();
+    const service = new PlansService(repository);
+    const useCase = new CreatePlanUseCase(service);
+
+    await useCase.exec(data);
+
+    await expect(useCase.exec(data)).rejects.toThrowError(
+      new Error("Plan already created")
+    );
+  });
 });

@@ -19,6 +19,12 @@ class CreatePlanUseCase implements ICreatePlanUseCase {
       throw new Error("Invalid company document");
     }
 
+    const planAlreadyCreated = await this.service.findByDocument(data.document);
+
+    if (planAlreadyCreated) {
+      throw new Error("Plan already created");
+    }
+
     const plan = await this.service.create(data);
 
     return plan;
