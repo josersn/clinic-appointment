@@ -44,4 +44,26 @@ describe("Create Customer Use Case", () => {
       new Error("Customer email already used")
     );
   });
+
+  it("Should not be able to create customer with email already exist", async () => {
+    const data = {
+      name: "José Ramos",
+      document: "94799189000",
+      email: "jose.ramos@gmail.com",
+      password: "12345678",
+      phone: "11970707070",
+    };
+
+    const repository = new CustomerRepositoryInMemory();
+    const service = new CustomerService(repository);
+    const useCase = new CreateCustomerUseCase(service);
+
+    await useCase.exec(data);
+
+    data.email = "new_email@gmail.com"
+
+    await expect(useCase.exec(data)).rejects.toThrowError(
+      new Error("Customer phone already used")
+    );
+  });
 });
