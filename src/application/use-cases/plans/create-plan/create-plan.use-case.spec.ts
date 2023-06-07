@@ -6,7 +6,7 @@ describe("Create Plan use case", () => {
   it("Should be able to create a new Plan", async () => {
     const data = {
       name: "Sami Saude",
-      document: "1234566789",
+      document: "36567721000125",
     };
 
     const repository = new PlanRepositoryInMemory();
@@ -19,5 +19,20 @@ describe("Create Plan use case", () => {
     expect(plan.id).toBeTruthy();
     expect(plan.isActive).toBe(true);
     expect(plan.name).toBe(data.name);
+  });
+
+  it("Should not be able to create a new Plan with wrong CNPJ", async () => {
+    const data = {
+      name: "Sami Saude",
+      document: "WRONG_DOCUMENT",
+    };
+
+    const repository = new PlanRepositoryInMemory();
+    const service = new PlansService(repository);
+    const useCase = new CreatePlanUseCase(service);
+
+    await expect(useCase.exec(data)).rejects.toThrowError(
+      new Error("Invalid company document")
+    );
   });
 });
