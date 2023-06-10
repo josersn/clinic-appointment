@@ -16,11 +16,11 @@ class CreateCustomerUseCase implements ICreateCustomerUseCase {
   constructor(private service: ICustomerService) {}
 
   async exec(data: IRequest): Promise<CustomerDTO> {
-    const customerAlreadyCreated = await this.service.findCustomerByEmail(
+    const customerEmailAlreadyCreated = await this.service.findCustomerByEmail(
       data.email
     );
 
-    if (customerAlreadyCreated) {
+    if (customerEmailAlreadyCreated) {
       throw new Error("Customer email already used");
     }
 
@@ -30,6 +30,12 @@ class CreateCustomerUseCase implements ICreateCustomerUseCase {
 
     if (customerPhoneAlreadyCreated) {
       throw new Error("Customer phone already used");
+    }
+
+    const customerDocumentAlreadyCreated = await this.service.findCustomerByDocument(data.document);
+
+    if (customerDocumentAlreadyCreated) {
+      throw new Error("Customer document already used");
     }
 
     return this.service.create(data);
