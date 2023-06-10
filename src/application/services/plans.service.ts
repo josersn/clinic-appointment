@@ -17,31 +17,29 @@ class PlansService implements IPlansService {
   }
 
   validateDocument(document: string): boolean {
-    let cnpj = document.replace(/[^\d]+/g, "");
+    if (document == "") return false;
 
-    if (cnpj == "") return false;
+    if (document.length != 14) return false;
 
-    if (cnpj.length != 14) return false;
-
-    // Elimina CNPJs invalidos conhecidos
+    // Elimina CNPJ invalidos conhecidos
     if (
-      cnpj == "00000000000000" ||
-      cnpj == "11111111111111" ||
-      cnpj == "22222222222222" ||
-      cnpj == "33333333333333" ||
-      cnpj == "44444444444444" ||
-      cnpj == "55555555555555" ||
-      cnpj == "66666666666666" ||
-      cnpj == "77777777777777" ||
-      cnpj == "88888888888888" ||
-      cnpj == "99999999999999"
+      document == "00000000000000" ||
+      document == "11111111111111" ||
+      document == "22222222222222" ||
+      document == "33333333333333" ||
+      document == "44444444444444" ||
+      document == "55555555555555" ||
+      document == "66666666666666" ||
+      document == "77777777777777" ||
+      document == "88888888888888" ||
+      document == "99999999999999"
     )
       return false;
 
     // Valida DVs
-    let tamanho = cnpj.length - 2;
-    let numeros: any = cnpj.substring(0, tamanho);
-    let digitos = cnpj.substring(tamanho);
+    let tamanho = document.length - 2;
+    let numeros: any = document.substring(0, tamanho);
+    let digitos = document.substring(tamanho);
     let soma: any = 0;
     let pos = tamanho - 7;
     for (let i = tamanho; i >= 1; i--) {
@@ -52,7 +50,7 @@ class PlansService implements IPlansService {
     if (resultado != digitos.charAt(0)) return false;
 
     tamanho = tamanho + 1;
-    numeros = cnpj.substring(0, tamanho);
+    numeros = document.substring(0, tamanho);
     soma = 0;
     pos = tamanho - 7;
     for (let i = tamanho; i >= 1; i--) {
