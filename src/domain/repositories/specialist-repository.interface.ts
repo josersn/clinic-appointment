@@ -2,6 +2,7 @@ import { Specialist } from "../entities/specialist";
 
 interface ISpecialistRepository {
   create(data: SpecialistDTO): Promise<Specialist>;
+  findAll(): Promise<SpecialistDTO[]>;
 }
 
 interface SpecialistDTO {

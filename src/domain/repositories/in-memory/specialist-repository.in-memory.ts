@@ -24,6 +24,10 @@ class SpecialistRepositoryInMemory implements ISpecialistRepository {
 
     return specialist;
   }
+
+  async findAll(): Promise<SpecialistDTO[]> {
+    return this.specialists;
+  }
 }
 
 export { SpecialistRepositoryInMemory };

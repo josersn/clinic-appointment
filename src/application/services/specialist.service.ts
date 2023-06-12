@@ -7,6 +7,7 @@ import {
 interface ISpecialistService {
   create(data: SpecialistDTO): Promise<Specialist>;
   validateDocument(document: string): boolean;
+  listAll(): Promise<SpecialistDTO[]>;
 }
 
 class SpecialistService implements ISpecialistService {
@@ -19,7 +20,7 @@ class SpecialistService implements ISpecialistService {
   validateDocument(document: string): boolean {
     let soma = 0;
     let resto;
-    
+
     if (document == "00000000000") return false;
 
     for (let i = 1; i <= 9; i++)
@@ -37,6 +38,10 @@ class SpecialistService implements ISpecialistService {
     if (resto == 10 || resto == 11) resto = 0;
     if (resto != parseInt(document.substring(10, 11))) return false;
     return true;
+  }
+
+  listAll(): Promise<SpecialistDTO[]> {
+    return this.repository.findAll();
   }
 }
 
