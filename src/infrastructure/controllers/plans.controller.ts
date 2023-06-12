@@ -17,7 +17,7 @@ export default class PlansController {
 
       return reply.status(201).send(plan);
     } catch (error) {
-      console.log(error);
+      return reply.status(500).send();
     }
   }
 }
