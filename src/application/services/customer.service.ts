@@ -3,6 +3,7 @@ import {
   CustomerDTO,
   ICustomerRepository,
 } from "../../domain/repositories/customer-repository.interface";
+import { IEncryption } from "../../infrastructure/adapters/encryption/interface";
 
 interface ICustomerService {
   create(customer: CustomerDTO): Promise<Customer>;
@@ -12,9 +13,13 @@ interface ICustomerService {
 }
 
 class CustomerService implements ICustomerService {
-  constructor(private repository: ICustomerRepository) {}
+  constructor(
+    private repository: ICustomerRepository,
+    private encryptionAdapter: IEncryption
+  ) {}
 
-  create(customer: CustomerDTO): Promise<Customer> {
+  async create(customer: CustomerDTO): Promise<Customer> {
+    customer.password = await this.encryptionAdapter.crypt(customer.password);
     return this.repository.create(customer);
   }
 
@@ -34,7 +39,9 @@ class CustomerService implements ICustomerService {
     });
   }
 
-  async findCustomerByDocument(document: string): Promise<Customer | undefined> {
+  async findCustomerByDocument(
+    document: string
+  ): Promise<Customer | undefined> {
     return this.repository.findBy({
       where: {
         document,
