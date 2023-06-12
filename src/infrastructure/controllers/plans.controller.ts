@@ -1,6 +1,6 @@
 import { FastifyReply } from "fastify";
 import { Controller, POST } from "fastify-decorators";
-import { PlansService } from "../../application/services/plans.service";
+import { PlansService } from "../../application/services/plan.service";
 import { CreatePlanUseCase } from "../../application/use-cases/plans/create-plan/create-plan.use-case";
 import { PlanRepositoryInMemory } from "../../domain/repositories/in-memory/plan-repository.in-memory";
 

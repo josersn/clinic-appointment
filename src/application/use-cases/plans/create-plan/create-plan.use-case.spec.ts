@@ -1,5 +1,5 @@
 import { PlanRepositoryInMemory } from "../../../../domain/repositories/in-memory/plan-repository.in-memory";
-import { PlansService } from "../../../services/plans.service";
+import { PlanService } from "../../../services/plan.service";
 import { CreatePlanUseCase } from "./create-plan.use-case";
 
 describe("Create Plan use case", () => {
@@ -10,7 +10,7 @@ describe("Create Plan use case", () => {
     };
 
     const repository = new PlanRepositoryInMemory();
-    const service = new PlansService(repository);
+    const service = new PlanService(repository);
     const useCase = new CreatePlanUseCase(service);
 
     const plan = await useCase.exec(data);
@@ -28,7 +28,7 @@ describe("Create Plan use case", () => {
     };
 
     const repository = new PlanRepositoryInMemory();
-    const service = new PlansService(repository);
+    const service = new PlanService(repository);
     const useCase = new CreatePlanUseCase(service);
 
     await expect(useCase.exec(data)).rejects.toThrowError(
@@ -43,7 +43,7 @@ describe("Create Plan use case", () => {
     };
 
     const repository = new PlanRepositoryInMemory();
-    const service = new PlansService(repository);
+    const service = new PlanService(repository);
     const useCase = new CreatePlanUseCase(service);
 
     await useCase.exec(data);

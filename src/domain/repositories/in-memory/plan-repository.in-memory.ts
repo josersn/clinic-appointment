@@ -28,6 +28,10 @@ class PlanRepositoryInMemory implements IPlanRepository {
 
     return this.plans.find((plan) => plan[key] === value);
   }
+
+  async findAll(): Promise<PlanDTO[]> {
+    return this.plans;
+  }
 }
 
 export { PlanRepositoryInMemory };

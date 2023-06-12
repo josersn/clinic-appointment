@@ -1,6 +1,6 @@
 import { PlanDTO } from "../../../../domain/repositories/plan-repository.interface";
 import { IUseCase } from "../../../core/use-case";
-import { IPlansService } from "../../../services/plans.service";
+import { IPlansService } from "../../../services/plan.service";
 
 interface IRequest {
   name: string;

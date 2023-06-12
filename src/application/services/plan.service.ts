@@ -7,9 +7,10 @@ interface IPlansService {
   create(data: PlanDTO): Promise<PlanDTO>;
   validateDocument(document: string): boolean;
   findByDocument(document: string): Promise<PlanDTO | undefined>;
+  listAll(): Promise<PlanDTO[]>;
 }
 
-class PlansService implements IPlansService {
+class PlanService implements IPlansService {
   constructor(private repository: IPlanRepository) {}
 
   async create(data: PlanDTO): Promise<PlanDTO> {
@@ -69,6 +70,10 @@ class PlansService implements IPlansService {
       },
     });
   }
+
+  async listAll(): Promise<PlanDTO[]> {
+    return this.repository.findAll();
+  }
 }
 
-export { PlansService, IPlansService };
+export { PlanService, IPlansService };
