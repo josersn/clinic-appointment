@@ -2,20 +2,14 @@ name: "Unit test in CI"
 
 on:
   pull_request:
-    branches:
-      - main
-      - development
+    branches: ["master", "development"]
   push:
-    branches:
-      - main
-      - development
+    branches: ["master", "development"]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
+
     steps:
       - name: Run unit tests
       - run: npx jest
