@@ -1,7 +1,8 @@
 name: "Unit test in CI"
 
-on:
+on: 
   pull_request:
+    types: [opened, reopened, synchronize]
     branches:
       - master
       - development
