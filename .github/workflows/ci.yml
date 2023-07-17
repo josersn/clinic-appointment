@@ -3,11 +3,11 @@ name: "Unit test in CI"
 on:
   pull_request:
     branches:
-      - main
+      - master
       - development
   push:
     branches:
-      - main
+      - master
       - development
 
 jobs:
