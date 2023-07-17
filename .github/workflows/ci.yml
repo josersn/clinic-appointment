@@ -4,6 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
+    types: [opened, reopened, synchronize]
     branches: [ master ]
   
   
@@ -24,5 +25,5 @@ jobs:
       - name: Install Dependencies
         run: npm i
         
-      - name: run unit test
+      - name: Run unit test
         run: npm run test
